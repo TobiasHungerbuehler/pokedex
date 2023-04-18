@@ -8,21 +8,34 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body onload="loadData()">
 
-    <div class="card" id="card">
+    <body onload="init()">
+
+    <header>
+        <H1>Pokedex</H1>
+    </header>
+        
+        <!-- <div class="card" id="card">
         <h2 id="name">Name</h2>
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" alt="">
-    </div>
-
-
+    </div> -->
+    
     <div class="stage">
+        Stage
+        <div class="icon" onclick="loadPokemon('26')">
 
+        </div>
+        
         
     </div>
-
     
+    
+    
+    <div class="overlay d-none" id="overlay">
 
+        <h1>Overlay</h1>
+
+    </div>
     
 
     

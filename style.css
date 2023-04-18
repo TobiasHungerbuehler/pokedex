@@ -1,7 +1,41 @@
 body {
     margin: 0;
     padding: 0;
+    z-index: 1;
 }
+
+header {
+
+    width: 100%;
+    height: 70px;
+    background-color: crimson;
+}
+
+
+.overlay {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+
+
+    background-image: linear-gradient(to top, #A4A4EB 0%,  #CCB8EA 90%); 
+
+    
+    
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
 
 .stage {
     width: 100%;
@@ -9,11 +43,33 @@ body {
     background-color: bisque;
 }
 
-.card {
-    width: 100%;
-    background-color: rgb(141, 19, 19);
+.icon {
+    height: 100px;
+    width: 100px;
+    background-color: blue;
 }
 
+.card {
+    width: 90%;
+    /* background-color: rgb(141, 19, 19);  */
+    border: 1px groove  yellow;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
 .card img {
-    background-color: aliceblue;
+    height: 220px;
+    width: 220px;
+    object-fit: contain;
+
+    border: 1px solid;
+}
+
+.d-none {
+    display: none;
 }
