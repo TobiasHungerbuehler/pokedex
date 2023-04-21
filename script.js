@@ -4,17 +4,12 @@ function init() {
 }   
 
 
-
-
 async function renderPokedex() {
     for (let i = 0; i < 70; i++) {
         let pokemon = await loadPokemon(i +1);           
         createIcon(pokemon, i)
     }
 }
-
-
-
 
 
 function createIcon(pokemon, id) {
