@@ -12,10 +12,10 @@ async function renderPokedex() {
 }
 
 
-function createIcon(pokemon, id) {
+function createIcon(pokemon, i) {
     document.getElementById('stage').innerHTML += /*html*/ `
-        <div class="icon-container">
-            <div class="icon" id='icon${id}'>
+        <div class="icon-container" onclick="showPokemonCard(1)">
+            <div class="icon" id='icon${i}'>
                 <img class="icon-ball" src="./img/ball2.png" alt="">
 
                 <div class="icon-inlay">
@@ -27,7 +27,7 @@ function createIcon(pokemon, id) {
                     <img class="icon-pokemon-img" src="${pokemon['sprites']['other']['dream_world']['front_default']}" alt="">
                     <!-- Chart Number -->
                     <div  class="number-container">
-                        <h3># ${id}</h3>
+                        <h3># ${i+1}</h3>
                     </div>
 
                 </div>
@@ -36,7 +36,7 @@ function createIcon(pokemon, id) {
             </div>
         </div>
         `;
-    setBgColor(pokemon, id);
+    setBgColor(pokemon, i);
 }
 
 
@@ -79,9 +79,6 @@ function setBgColor(pokemon, id) {
 }
 
 
-
-
-// Pipe 2 ///////////////////////////////////////////////////////
 async function loadPokemon(id) {
     selectetPoke = id;
     let url = `https://pokeapi.co/api/v2/pokemon/${selectetPoke}`;
@@ -90,13 +87,16 @@ async function loadPokemon(id) {
     return responseAsJson;   
 }
 
-//console.log(poke['sprites']['other']['dream_world']['front_default']);
 
-async function showPokemonCard(pokeId) {
-    let pokemon = await loadPokemon(pokeId);
+// Pipe 2 ///////////////////////////////////////////////////////
+
+async function showPokemonCard(iconId) {
+    //console.log(id)
+    //let pokemon = await loadPokemon(id);
     // overlay anzeigen
+    document.getElementById('icon'+iconId).classList.add('icon-to-card')
     document.getElementById('overlay').classList.remove('d-none')
-    createCardHTML(pokemon);
+    //createCardHTML(pokemon);
 }
 
 function createCardHTML(pokemon){
