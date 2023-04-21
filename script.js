@@ -1,76 +1,44 @@
 let selectetPoke;
 function init() {
     renderPokedex();
-    //testRender();
 }
+
 
 async function renderPokedex() {
     for (let i = 0; i < 70; i++) {
         let pokemon = await loadPokemon(i +1);           
         createIcon(pokemon, i)
-        console.log(i +1, pokemon['types'][0]['type']['name']);
-        //groups.push(pokemon['types'][0]['type']['name']);
-
     }
-
-
-}
-async function testRender() {
-    let pokemon = await loadPokemon(1); // green
-    createIcon(pokemon, 1);
-
-    pokemon = await loadPokemon(4); // red
-    createIcon(pokemon, 2);
-    
-    pokemon = await loadPokemon(7); // blau
-    createIcon(pokemon,3);
-
-    pokemon = await loadPokemon(10); // hell grün
-    createIcon(pokemon, 4);
-
-    pokemon = await loadPokemon(16); // hell blau
-    createIcon(pokemon,5);
-
-    pokemon = await loadPokemon(23); // violet
-    createIcon(pokemon,6);
-
-    pokemon = await loadPokemon(25,7); // yellow
-    createIcon(pokemon);
 }
 
 
 function createIcon(pokemon, id) {
     document.getElementById('stage').innerHTML += /*html*/ `
-        <div class="icon" id='icon${id}'>
-            
-        
-        <!-- Pokemon Logo -->
-            <img class="icon-pokedex-logo" src="./img/pokedex.png" alt="">
+        <div class="icon-container">
+            <div class="icon" id='icon${id}'>
+                <img class="icon-ball" src="./img/ball2.png" alt="">
 
-            <!-- Pokemon Name -->
-            <h2 id="name">${pokemon['forms'][0]['name']}</h2>
+                <div class="icon-inlay">
+                    <!-- Pokemon Logo -->
+                    <img class="icon-pokedex-logo" src="./img/pokedex.png" alt="">
+                    <!-- Pokemon Name -->
+                    <h1 id="name">${pokemon['forms'][0]['name']}</h1>
+                    <!-- Pokemon Image Original -->
+                    <img class="icon-pokemon-img" src="${pokemon['sprites']['other']['dream_world']['front_default']}" alt="">
+                    <!-- Chart Number -->
+                    <div  class="number-container">
+                        <h3># ${id}</h3>
+                    </div>
 
-            <!-- show Pokemon Image -->
-            <!-- Pokemon Image Original -->
+                </div>
+      
 
-            <img class="icon-pokemon-img" src="${pokemon['sprites']['other']['dream_world']['front_default']}" alt="">
-
-
-            <!-- Pokemon Image BESTE-->
-            <!-- <img src="${pokemon['sprites']['other']['home']['front_default']}" alt=""> -->
-
-            <!-- Pokemon Image BESTE2-->
-            <!-- <img src="${pokemon['sprites']['other']['home']['front_shiny']}" alt=""> -->
-
-            <!-- Type for coloring -->
-        
-            <h2 id="name">${pokemon['types'][0]['type']['name']}</h2>
-
-            
+            </div>
         </div>
         `;
     setBgColor(pokemon, id);
 }
+
 
 function setBgColor(pokemon, id) {
     let colorClass = pokemon['types'][0]['type']['name'];
@@ -107,11 +75,7 @@ function setBgColor(pokemon, id) {
     }
     if (colorClass == 'psychic') {
         document.getElementById('icon'+id).classList.add(colorClass);
-    } 
-
-    
-
-    
+    }  
 }
 
 
