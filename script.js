@@ -1,7 +1,9 @@
 let selectetPoke;
 function init() {
     renderPokedex();
-}
+}   
+
+
 
 
 async function renderPokedex() {
@@ -10,6 +12,9 @@ async function renderPokedex() {
         createIcon(pokemon, i)
     }
 }
+
+
+
 
 
 function createIcon(pokemon, id) {
