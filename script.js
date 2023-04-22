@@ -50,12 +50,24 @@ function createCard(pokemonData, i, parent, cardId) {
                 </div>
             </div>
         `;
-    setBgColor(pokemonData, i, cardId);
+    setBgColor(pokemonData, cardId);
     console.log(cardId)
 }
 
 
-function setBgColor(pokemonData, i, parent) {
+function setBgColor(pokemonData, parent) {
+    const colorClass = pokemonData['types'][0]['type']['name'];
+    const validClasses = ['grass', 'fire', 'water', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'psychic'];
+    
+    for (let i = 0; i < validClasses.length; i++) {
+        if (colorClass === validClasses[i]) {
+        document.getElementById(parent).classList.add(colorClass);
+        break;}
+        }   
+    }
+
+
+function setBgColor2(pokemonData,  parent) {
     let colorClass = pokemonData['types'][0]['type']['name'];
 
     if (colorClass == 'grass') {
