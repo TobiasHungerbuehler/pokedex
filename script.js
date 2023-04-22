@@ -1,11 +1,11 @@
-let selectetPoke;
+let selectetPokemon;
 function init() {
     renderPokedex();
 }   
 
 
 async function renderPokedex() {
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i <= 24; i++) {
         let pokemonData = await loadPokemonData(i +1);           
         createIconContainer(pokemonData, i)
     }
@@ -21,19 +21,20 @@ function createIconContainer(pokemonData, i) {
 
 
 function createCard(pokemonData, i, parent, cardId) {
+    let pokemonName = pokemonData['forms'][0]['name'];
     document.getElementById(parent).innerHTML += /*html*/ `
             <div class="card" id='${cardId}'>
-                <img class="icon-ball" src="./img/ball2.png" alt="">
+                <img class="icon-ball" id="icon-ball${cardId.substring(4)}" src="./img/ball2.png" alt="">
                 <div class="card-top">
                     <img class="icon-pokedex-logo" src="./img/pokedex.png" alt="">
-                    <h1 id="name">${pokemonData['forms'][0]['name']}</h1>
+                    <h1 id="name">${pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)}</h1>
                     <img class="icon-pokemon-img" src="${pokemonData['sprites']['other']['dream_world']['front_default']}" alt="">
                     <div  class="number-container">
                         <h3># ${i+1}</h3>
                     </div>
                 </div>
             </div>
-        </div>
+
         `;
     setBgColor(pokemonData, i, cardId);
 }
@@ -90,33 +91,32 @@ async function loadPokemonData(id) {
 //Pipe 2
 async function showFullCard(cardId) {
     let pokemonData = await loadPokemonData(cardId+1);
+    selectetPokemon = cardId;
     document.getElementById('overlay').classList.remove('d-none') // overlay anzeigen
     createCard(pokemonData, cardId, 'overlay', 'card'+-1)
     document.getElementById('card'+-1).classList.add('full-card');
+    document.getElementById('icon-ball'+-1).classList.add('ball-rotation');
     
     
-    createCardHTML();
+    showNavigation();
 }
 
-function createCardHTML(){
+
+function showNavigation(){
     document.getElementById('card-1').innerHTML += /*html*/ `
-
-
-            <div class="card-nav">
-                <button onclick="loadPokemon(selectetPoke -1)" ><</button>
-                <button onclick="closeCard()" >Schliessen</button>
-                <button onclick="loadPokemon(selectetPoke +1)" >></button>
-            </div>
-
-    
-    
+        <div class="card-nav">
+            <button onclick="newFullCard(selectetPokemon -1)" ><</button>
+            <button onclick="closeCard()" >Schliessen</button>
+            <button onclick="newFullCard(selectetPokemon +1)" >></button>
+        </div>
     `;
-
 }
 
+function newFullCard(nextPokemon) {
+    closeCard()
+    showFullCard(nextPokemon);
 
-
-
+}
 
 
 function closeCard() {
