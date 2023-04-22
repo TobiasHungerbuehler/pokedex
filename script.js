@@ -37,7 +37,6 @@ function createCard(pokemonData, i, parent, cardId) {
                     </div>
                 </div>
             </div>
-
         `;
     setBgColor(pokemonData, i, cardId);
 }
@@ -111,6 +110,7 @@ async function showFullCard(pokemonId) {
     
     
     showNavigation();
+    showDetails(selectetPokemon);
 }
 
 
@@ -141,6 +141,15 @@ function closeCard() {
 
 function errorMessage() {
     window.alert('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden')
+}
+
+async function showDetails(selectetPokemon) {
+    let url = `https://pokeapi.co/api/v2/pokemon-species/${selectetPokemon}`;
+    let response = await fetch(url);
+    let responseAsJson = await response.json();
+    //return responseAsJson;
+    console.log(responseAsJson['flavor_text_entries'][25]['flavor_text']); // Beschreibungstext !
+
 }
 
 
