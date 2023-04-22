@@ -61,12 +61,21 @@ header {
     transition: all 225ms ease-in-out;
 }
 
-.icon-to-card {
-    position: absolute;
-    z-index: 3;
-    top: 20px;
+.card:hover {
+    height: 100%;
+    width: 100%;
+    transition: all 225ms ease-in-out;
+}
 
+.card-top {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.full-card {
+    max-height: 90vh;
     width: 100%;
     max-width: 600px;
 }
@@ -79,19 +88,17 @@ header {
 
     top: 0;
     right: 0;
-    bottom: 0;
 
+    
 
     background-color: white;
 
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }
 
 
-.icon:hover {
-    height: 100%;
-    width: 100%;
-    transition: all 225ms ease-in-out;
-}
 
 
 .icon-pokedex-logo {
@@ -108,13 +115,6 @@ header {
 }
 
 
-.icon-inlay {
-
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .icon-ball {
     position: absolute;
