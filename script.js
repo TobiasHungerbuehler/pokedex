@@ -15,6 +15,18 @@ async function renderPokedex() {
 }
 
 
+async function loadPokemonData(pokemonId) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+    let response = await fetch(url);
+    if (!response.ok) {
+        errorMessage();
+        } else {
+            let responseAsJson = await response.json();
+            return responseAsJson;   
+        }
+}
+
+
 function createIconContainer(pokemonData, i) {
     document.getElementById('stage').innerHTML += /*html*/ `
         <div class="icon-container" id="icon-container${i}" onclick="showFullCard(${i+1})"></div>
@@ -39,10 +51,11 @@ function createCard(pokemonData, i, parent, cardId) {
             </div>
         `;
     setBgColor(pokemonData, i, cardId);
+    console.log(cardId)
 }
 
 
-function setBgColor(pokemonData, id, parent) {
+function setBgColor(pokemonData, i, parent) {
     let colorClass = pokemonData['types'][0]['type']['name'];
 
     if (colorClass == 'grass') {
@@ -81,38 +94,30 @@ function setBgColor(pokemonData, id, parent) {
 }
 
 
-async function loadPokemonData(pokemonId) {
-    let url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    let response = await fetch(url);
-    if (!response.ok) {
-        errorMessage();
-        //throw new Error(`HTTP error! Status: ${response.status}`);
-        } else {
-            let responseAsJson = await response.json();
-            return responseAsJson;   
-        }
-}
+//Show Full Card ////////////////////////////////////
 
-
-function searchPokemon() {
-    showFullCard('pikachu'); ///// inputfeld fehlt noch
-}
-
-//Pipe 2
 async function showFullCard(pokemonId) { 
     let pokemonData = await loadPokemonData(pokemonId);
     selectetPokemon = pokemonData['id'];
-    
-    document.getElementById('overlay').classList.remove('d-none') // overlay anzeigen
-    createCard(pokemonData, pokemonId, 'overlay', 'card'+-1)
-    document.getElementById('card'+-1).classList.add('full-card');
-    document.getElementById('icon-ball'+-1).classList.add('ball-rotation');
-    
-    
-    showNavigation();
-    showDetails(selectetPokemon);
+    showOverlay(pokemonData, pokemonId)
 }
 
+
+function showOverlay(pokemonData, pokemonId) {
+    document.getElementById('overlay').classList.remove('d-none') 
+    createCardHeader(pokemonData, pokemonId)
+}
+
+
+function createCardHeader(pokemonData, pokemonId) {
+        createCard(pokemonData, pokemonId, 'overlay', 'card'+-1)
+        document.getElementById('card'+-1).classList.add('full-card');
+        document.getElementById('icon-ball'+-1).classList.add('ball-rotation');
+        
+        showNavigation();
+        showDetails(selectetPokemon);
+
+}
 
 
 function showNavigation(){
@@ -124,6 +129,17 @@ function showNavigation(){
         </div>
     `;
 }
+
+
+async function showDetails(selectetPokemon) {
+    let url = `https://pokeapi.co/api/v2/pokemon-species/${selectetPokemon}`;
+    let response = await fetch(url);
+    let responseAsJson = await response.json();
+    //return responseAsJson;
+    console.log(responseAsJson['flavor_text_entries'][25]['flavor_text']); // Beschreibungstext !
+
+}
+
 
 function newFullCard(nextPokemon) {
     closeCard()
@@ -143,17 +159,11 @@ function errorMessage() {
     window.alert('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden')
 }
 
-async function showDetails(selectetPokemon) {
-    let url = `https://pokeapi.co/api/v2/pokemon-species/${selectetPokemon}`;
-    let response = await fetch(url);
-    let responseAsJson = await response.json();
-    //return responseAsJson;
-    console.log(responseAsJson['flavor_text_entries'][25]['flavor_text']); // Beschreibungstext !
 
+
+function searchPokemon() {
+    showFullCard('pikachu'); ///// inputfeld fehlt noch
 }
-
-
-
 
 
 
