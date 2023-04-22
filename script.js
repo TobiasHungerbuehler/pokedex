@@ -6,25 +6,35 @@ function init() {
 
 async function renderPokedex() {
     for (let i = 0; i < 70; i++) {
-        let pokemon = await loadPokemon(i +1);           
-        createIcon(pokemon, i)
+        let pokemonData = await loadPokemonData(i +1);           
+        createIconContainer(pokemonData, i)
     }
 }
 
-
-function createIcon(pokemon, i) {
+function createIconContainer(pokemonData, i) {
     document.getElementById('stage').innerHTML += /*html*/ `
-        <div class="icon-container" onclick="showPokemonCard(1)">
-            <div class="icon" id='icon${i}'>
+        <div class="icon-container" id="icon-container${i}" onclick="showFullCard(1)">
+
+        </div>
+        `;
+    createCard(pokemonData, i)
+
+}
+
+
+function createCard(pokemonData, i) {
+    document.getElementById('icon-container'+i).innerHTML += /*html*/ `
+
+            <div class="card" id='card${i}'>
                 <img class="icon-ball" src="./img/ball2.png" alt="">
 
                 <div class="icon-inlay">
                     <!-- Pokemon Logo -->
                     <img class="icon-pokedex-logo" src="./img/pokedex.png" alt="">
                     <!-- Pokemon Name -->
-                    <h1 id="name">${pokemon['forms'][0]['name']}</h1>
+                    <h1 id="name">${pokemonData['forms'][0]['name']}</h1>
                     <!-- Pokemon Image Original -->
-                    <img class="icon-pokemon-img" src="${pokemon['sprites']['other']['dream_world']['front_default']}" alt="">
+                    <img class="icon-pokemon-img" src="${pokemonData['sprites']['other']['dream_world']['front_default']}" alt="">
                     <!-- Chart Number -->
                     <div  class="number-container">
                         <h3># ${i+1}</h3>
@@ -36,50 +46,50 @@ function createIcon(pokemon, i) {
             </div>
         </div>
         `;
-    setBgColor(pokemon, i);
+    setBgColor(pokemonData, i);
 }
 
 
-function setBgColor(pokemon, id) {
-    let colorClass = pokemon['types'][0]['type']['name'];
+function setBgColor(pokemonData, id) {
+    let colorClass = pokemonData['types'][0]['type']['name'];
 
     if (colorClass == 'grass') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'fire') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'water') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'bug') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'normal') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'poison') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'electric') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'ground') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'fairy') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'fighting') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }
     if (colorClass == 'psychic') {
-        document.getElementById('icon'+id).classList.add(colorClass);
+        document.getElementById('card'+id).classList.add(colorClass);
     }  
 }
 
 
-async function loadPokemon(id) {
+async function loadPokemonData(id) {
     selectetPoke = id;
     let url = `https://pokeapi.co/api/v2/pokemon/${selectetPoke}`;
     let response = await fetch(url);
@@ -90,7 +100,7 @@ async function loadPokemon(id) {
 
 // Pipe 2 ///////////////////////////////////////////////////////
 
-async function showPokemonCard(iconId) {
+async function showFullCard(iconId) {
     //console.log(id)
     //let pokemon = await loadPokemon(id);
     // overlay anzeigen
@@ -99,14 +109,14 @@ async function showPokemonCard(iconId) {
     //createCardHTML(pokemon);
 }
 
-function createCardHTML(pokemon){
+function createCardHTML(pokemonData){
     document.getElementById('overlay').innerHTML = /*html*/ `
         <div class="card" id="card">
             
             <!-- Pokemon Image -->
-            <img src="${pokemon['sprites']['other']['dream_world']['front_default']}" alt=""> 
+            <img src="${pokemonData['sprites']['other']['dream_world']['front_default']}" alt=""> 
             <!-- Pokemon Name -->
-            <h2 id="name">${pokemon['forms'][0]['name']}</h2>
+            <h2 id="name">${pokemonData['forms'][0]['name']}</h2>
 
 
 

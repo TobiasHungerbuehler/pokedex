@@ -48,7 +48,7 @@ header {
     justify-content: center;
 }
 
-.icon {
+.card {
     position: relative;
     height: 95%;
     width: 95%;
@@ -247,26 +247,25 @@ header {
 
 
 /* alt */
-.card {
+/* .card {
     width: 90%;
-    /* background-color: rgb(141, 19, 19);  */
     border: 1px groove  yellow;
 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+} */
 
 
 
-.card img {
+/* .card img {
     height: 220px;
     width: 220px;
     object-fit: contain;
 
     border: 1px solid;
-}
+} */
 
 .d-none {
     display: none;
