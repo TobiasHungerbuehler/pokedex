@@ -1,4 +1,5 @@
 let selectetPokemon;
+let validClasses = ['grass', 'fire', 'water', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'psychic'];
 
 
 function init() {
@@ -57,8 +58,6 @@ function createCard(pokemonData, i, parent, cardId) {
 
 function setBgColor(pokemonData, parent) {
     const colorClass = pokemonData['types'][0]['type']['name'];
-    const validClasses = ['grass', 'fire', 'water', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'psychic'];
-    
     for (let i = 0; i < validClasses.length; i++) {
         if (colorClass === validClasses[i]) {
         document.getElementById(parent).classList.add(colorClass);
@@ -67,43 +66,43 @@ function setBgColor(pokemonData, parent) {
     }
 
 
-function setBgColor2(pokemonData,  parent) {
-    let colorClass = pokemonData['types'][0]['type']['name'];
+// function setBgColor2(pokemonData,  parent) {
+//     let colorClass = pokemonData['types'][0]['type']['name'];
 
-    if (colorClass == 'grass') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'fire') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'water') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'bug') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'normal') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'poison') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'electric') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'ground') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'fairy') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'fighting') {
-        document.getElementById(parent).classList.add(colorClass);
-    }
-    if (colorClass == 'psychic') {
-        document.getElementById(parent).classList.add(colorClass);
-    }  
-}
+//     if (colorClass == 'grass') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'fire') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'water') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'bug') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'normal') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'poison') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'electric') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'ground') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'fairy') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'fighting') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }
+//     if (colorClass == 'psychic') {
+//         document.getElementById(parent).classList.add(colorClass);
+//     }  
+// }
 
 
 //Show Full Card ////////////////////////////////////
