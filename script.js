@@ -116,7 +116,9 @@ async function showFullCard(pokemonId) {
 
 function showOverlay(pokemonData, pokemonId) {
     document.getElementById('overlay').classList.remove('d-none') 
-    createCardHeader(pokemonData, pokemonId)
+    //createCardHeader(pokemonData, pokemonId)
+
+    setBgColor(pokemonData, 'card-1');
 }
 
 
