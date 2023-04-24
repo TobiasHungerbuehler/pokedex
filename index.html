@@ -18,9 +18,18 @@
 
     <header >
         <img class="logo" src="./img/pokedex.png" alt="">
-    </header>
-        
 
+        <form onsubmit="searchPokemon(); return false">
+            <input type="text" id="inputField" name="inputField" placeholder="">
+            <button type="submit" onclick="searchPokemon(event)">Go!</button>
+        </form>
+
+
+
+
+
+    </header>
+    
     
     <div class="stage" id="stage">
 
