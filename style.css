@@ -98,7 +98,10 @@ header {
 }
 
 .card-nav {
-    z-index: 3;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    background-color: #32B3E2;
 }
 
 
@@ -128,8 +131,6 @@ header {
 }
 
 .ball-rotation {
-    /* height: 280px;
-    top: 30px; */
     animation: rotation 30s infinite linear;
 
 }
@@ -161,6 +162,13 @@ header {
     color:  #FACB05;
     text-shadow: 0 0 10px #FFFFFF;
     text-align: center;
+}
+
+.white-inlay {
+    width: 98%;
+    min-height: 200px;
+    background-color: white;
+    border-radius: 25px;
 }
 
 
