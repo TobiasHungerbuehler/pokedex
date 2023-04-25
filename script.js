@@ -21,6 +21,7 @@ async function loadPokemonData(pokemonId) {
     let response = await fetch(url);
     if (!response.ok) {
         errorMessage('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden');
+        return false;
         } else {
             let responseAsJson = await response.json();
             return responseAsJson;   
@@ -79,13 +80,17 @@ function setBgColor(pokemonData, parent) {
         }   
     }
 
-    
+
 //Show Full Card ////////////////////////////////////
 
 async function showFullCard(pokemonId) { 
     let pokemonData = await loadPokemonData(pokemonId);
-    selectetPokemon = pokemonData['id'];
-    showOverlay(pokemonData, pokemonId)
+    if(pokemonData !== false){
+        
+        selectetPokemon = pokemonData['id'];
+        showOverlay(pokemonData, pokemonId)
+        
+    }
 }
 
 
@@ -93,15 +98,62 @@ function showOverlay(pokemonData, pokemonId) {
     document.getElementById('overlay').classList.remove('d-none') 
     setBgColor(pokemonData, 'card-1');
     showCardTop(pokemonData, -2);
-    showDetails(pokemonId);
+    showDetails(pokemonData, pokemonId);
 }
 
 
-async function showDetails(pokemonId) {
+async function showDetails(pokemonData, pokemonId) {
+
+    // 1 grösse
+    console.log('height / Grösse =',pokemonData['game_indices']['length'])
+    
+    // 2 gewicht
+    console.log('weight / Gewicht =',pokemonData['weight'])
+
+    // 3 Spezie / ategorie
+    await species(pokemonData['species']['url'])
+
+    // 5Fähigkeiten
+    await abilities(pokemonData['abilities'][0]['ability']['url']);
+
+    // 5 Typ
+    await type(pokemonData['types'][0]['type']['url'])
+
+
+    
+    
+
+
+    // Pokemon Description
     let url = `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`;
     let response = await fetch(url);
     let responseAsJson = await response.json();
     document.getElementById('description').innerHTML = responseAsJson['flavor_text_entries'][25]['flavor_text'];
+}
+
+//Fähigkeiten
+async function abilities(url) {
+    let response = await fetch(url);
+    let responseAsJson = await response.json();
+    let ability = responseAsJson['names'][4]['name'];// ['language'];//['short_effect'];
+    console.log('abilitie / Fähigkeiten',ability)
+}
+
+//Spezie
+async function species(url) {
+    let response = await fetch(url);
+    let responseAsJson = await response.json();
+    let species = responseAsJson['genera'][4]['genus'];// ['language'];//['short_effect'];
+    console.log('species / Spezie',species)
+}
+
+// Typ
+async function type(url) {
+    let response = await fetch(url);
+    let responseAsJson = await response.json();
+    let type = responseAsJson['names'][4]['name'];// ['language'];//['short_effect'];
+
+    console.log('Type / Typ =',type)
 }
 
 
@@ -130,7 +182,7 @@ function errorMessage(message) {
 async function searchPokemon() {
     let input = document.getElementById('input-field').value;
     if(input === '') {
-        errorMessage('Bitte Pokemon eingeben Englische Namen oder Zahlen verwenden');
+        errorMessage('Bitte Pokemon eingeben. Englische Namen oder Zahlen verwenden');
     } else {
         await showFullCard(input); 
         document.getElementById('input-field').value = '';
