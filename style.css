@@ -19,6 +19,10 @@ h1 {
 }
 
 header {
+    position: sticky;
+    background-color: white;
+    z-index: 3; 
+    top: 0;
     width: 100%;
     height: 70px;
     border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -35,8 +39,29 @@ header {
 
 form {
     margin-right: 10%;
-    border: 1px solid rgba(0,0,0,0.3);
-    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+
+.input-field {
+    height: 18px;
+    border-radius: 15px;
+    color: gray;
+}
+
+.submit-btn {
+    height: 22px;
+    margin-right: 1px;
+    background-color:  #fdcb03;
+    border-radius: 15px;
+    border: none;
+    border: 2px solid #356ABC;
+    color: #356ABC;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color:  #fcd32f;
 }
 
 input {
@@ -102,7 +127,7 @@ input {
 
 .overlay {
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     height: 100vh;
     top: 0;
