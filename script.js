@@ -20,7 +20,7 @@ async function loadPokemonData(pokemonId) {
     let url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     let response = await fetch(url);
     if (!response.ok) {
-        errorMessage();
+        errorMessage('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden');
         } else {
             let responseAsJson = await response.json();
             return responseAsJson;   
@@ -79,6 +79,7 @@ function setBgColor(pokemonData, parent) {
         }   
     }
 
+    
 //Show Full Card ////////////////////////////////////
 
 async function showFullCard(pokemonId) { 
@@ -103,23 +104,6 @@ async function showDetails(pokemonId) {
     document.getElementById('description').innerHTML = responseAsJson['flavor_text_entries'][25]['flavor_text'];
 }
 
-// function createCardHeader(pokemonData, pokemonId) {
-//         createCard(pokemonData, pokemonId, 'overlay', 'card'+-1)
-//         document.getElementById('card'+-1).classList.add('full-card');
-//         document.getElementById('icon-ball'+-1).classList.add('ball-rotation');
-        
-//         showNavigation();
-//         showDetails(selectetPokemon);
-
-// }
-
-
-// function showNavigation(){
-//     document.getElementById('card-1').innerHTML += /*html*/ `
-
-//     `;
-// }
-
 
 function next() {
     closeCard();
@@ -133,28 +117,24 @@ function back() {
 }
 
 
-
-
-
 function closeCard() {
-    //document.getElementById('overlay').innerHTML = '';
     document.getElementById('overlay').classList.add('d-none');
 }
 
 
-
-function errorMessage() {
-    window.alert('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden')
+function errorMessage(message) {
+    window.alert(message);
 }
 
 
 async function searchPokemon() {
-    let input = document.getElementById('inputField').value;
+    let input = document.getElementById('input-field').value;
     if(input === '') {
-        errorMessage();
-    }   
-    await showFullCard(input); 
-    document.getElementById('inputField').value = '';
+        errorMessage('Bitte Pokemon eingeben Englische Namen oder Zahlen verwenden');
+    } else {
+        await showFullCard(input); 
+        document.getElementById('input-field').value = '';
+    }  
 }
 
 
