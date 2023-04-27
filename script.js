@@ -109,90 +109,59 @@ async function loadDetails(url) {
 
 
 async function showDetails(pokemonData, pokemonId) {
-
-    // 1 grösse
     height(pokemonData)
-    //console.log('height / Grösse =',pokemonData['game_indices']['length'])
-    
-    // 2 gewicht
-    // console.log('weight / Gewicht =',pokemonData['weight'])
     weight(pokemonData)
-    
-    // 3 Kategorie
-    // await species(pokemonData['species']['url'])
     await species(pokemonData) 
-    
-    // 5Fähigkeiten
-    // await abilities(pokemonData['abilities'][0]['ability']['url']);
     await ability(pokemonData);
-    
-    // 5 Typ
-    // await type(pokemonData['types'][0]['type']['url'])
     await type(pokemonData)
-    
     await descriptionText(pokemonData)
-    
 }
+
 
 function height(pokemonData) {
     let height = pokemonData['game_indices']['length'];
     let heightInMeter = height * 0.0254;
     document.getElementById('height').innerHTML = `${heightInMeter.toFixed(1)} m`; 
-    //console.log('height / Grösse =',height);
 } 
+
 
 function weight(pokemonData) {
     let weight = pokemonData['weight']; 
     let weightInKg = weight * 0.45359237;
     document.getElementById('weight').innerHTML = `${weightInKg.toFixed(1)} kg`; 
-    console.log('weight / Gewicht =', weightInKg.toFixed(1));
 }
 
-// Kategorie
+
 async function species(pokemonData) {
     let url = pokemonData['species']['url'];
     let detailsAsJson = await loadDetails(url);
-    //let response = await fetch(url);
-    //let responseAsJson = await response.json();
-    //let  = responseAsJson['genera'][4]['genus'];
     let species = detailsAsJson['genera'][4]['genus'];
     document.getElementById('species').innerHTML = species; 
-    console.log('species / Kategorie',species)
 }
 
-//Fähigkeiten
+
 async function ability(pokemonData) {
     let url = pokemonData['abilities'][0]['ability']['url'];
     let detailsAsJson = await loadDetails(url);
-    //let response = await fetch(url);
-    //let responseAsJson = await response.json();
-    
     let ability = detailsAsJson['names'][4]['name'];
     document.getElementById('ability').innerHTML = ability;
-    //let abilities = await pokemonData(url); 
-    console.log('abilitie / Fähigkeiten',ability)
 }
 
-// Pokemon Description Text
+
 async function descriptionText(pokemonData) {
     let url = pokemonData['species']['url'];
     let detailsAsJson = await loadDetails(url);
-    //let response = await fetch(url);
-    //let responseAsJson = await response.json();
     let descriptionText = detailsAsJson['flavor_text_entries'][25]['flavor_text'];
     document.getElementById('description').innerHTML = descriptionText;
 }
 
 
-// Typ
 async function type(pokemonData) {
     let url = pokemonData['types'][0]['type']['url'];
     let detailsAsJson = await loadDetails(url);
-    //let response = await fetch(url);
-    //let responseAsJson = await response.json();
     let type = detailsAsJson['names'][4]['name'];
-
-    console.log('Type / Typ =',type)
+    document.getElementById('type').innerHTML = type;
+    setBgColor(pokemonData, 'type')
 }
 
 
