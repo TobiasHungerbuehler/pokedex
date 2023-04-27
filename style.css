@@ -206,10 +206,31 @@ input {
 }
 
 .white-inlay {
-    width: 98%;
+    width: 99%;
     min-height: 200px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 25px;
+    display: flex;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+.description {
+    width: 90%;
+}
+
+.details-container {
+    background-color: rgb(221, 221, 221);
+    width: 90%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.details-container h4, .details-container p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 
