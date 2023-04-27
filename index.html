@@ -17,11 +17,11 @@
     <body onload="init()">
 
     <header >
-        <img class="logo" src="./img/pokedex.png" alt="">
+        <img  class="logo" src="./img/pokedex.png" alt="">
 
         <form onsubmit="searchPokemon(); return false">
-            <input type="text" id="inputField" name="inputField" placeholder="">
-            <button type="submit" onclick="searchPokemon(event)">Go!</button>
+            <input type="text" class="input-field" id="input-field" name="inputField" placeholder="Suche">
+            <button class="submit-btn" type="submit">Go!</button>
         </form>
 
 
@@ -48,6 +48,22 @@
             <div class="white-inlay">
 
                 <div class="description" id="description"></div>
+
+                <div class="details-container">
+                    <div>
+                        <h4>Grösse</h4>
+                        <p id="height"></p>
+                        
+                        <h4>Gewicht</h4>
+                        <p id="weight"></p>
+
+                        <h4>Kategorie</h4>
+                        <p id="species"></p>
+
+                        <h4>Fähigkeiten</h4>
+                        <p id="ability"></p>
+                    </div>
+                </div>
 
             </div>
 
