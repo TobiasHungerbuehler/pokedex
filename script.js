@@ -113,8 +113,9 @@ async function showDetails(pokemonData, pokemonId) {
     weight(pokemonData)
     await species(pokemonData) 
     await ability(pokemonData);
-    await type(pokemonData)
+    await getType(pokemonData)
     await descriptionText(pokemonData)
+    stats(pokemonData)
 }
 
 
@@ -155,42 +156,44 @@ async function descriptionText(pokemonData) {
     document.getElementById('description').innerHTML = descriptionText;
 }
 
-
-async function type(pokemonData) {
-    let url = pokemonData['types'][0]['type']['url'];
-    let detailsAsJson = await loadDetails(url);
-    let type = detailsAsJson['names'][4]['name'];
-    document.getElementById('type').innerHTML = type;
-    setBgColor(pokemonData, 'type')
-    stats(pokemonData);
-}
-
-
-    
-    function stats(pokemonData) {
-        console.log(pokemonData['stats'][0]['base_stat'])
-        console.log('KP =',pokemonData['stats'][0]['base_stat'])
-        console.log('Angr =',pokemonData['stats'][1]['base_stat'])
-        console.log('Vert =',pokemonData['stats'][2]['base_stat'])
-        console.log('Sp Angr =',pokemonData['stats'][3]['base_stat'])
-        console.log('Sp Vert =',pokemonData['stats'][4]['base_stat'])
-        console.log('Initiative =',pokemonData['stats'][5]['base_stat'])
-
-        let kp = pokemonData['stats'][0]['base_stat'];
-        let attack = pokemonData['stats'][1]['base_stat'];
-        let defense = pokemonData['stats'][2]['base_stat'];
-        let spAtack = pokemonData['stats'][3]['base_stat'];
-        let spDefense = pokemonData['stats'][4]['base_stat'];
-        let speed = pokemonData['stats'][5]['base_stat'];
-        pokemonChart(kp, attack, defense, spAtack, spDefense, speed);
-}
-
-function destroyPokemonChart() {
-    const chart = Chart.getChart("chart");
-    if (chart) {
-      chart.destroy();
+async function getType(pokemonData) {    
+    let types = pokemonData['types'];
+    for (let i = 0; i < types.length; i++) {
+        const type = types[i]['type']['name'];
+        const typeUrl = types[i]['type']['url'];
+        let typeAsJson = await loadDetails(typeUrl);
+        let typeGerman = typeAsJson['names'][4]['name'];
+        createTypeHTML(type, typeGerman, i)
     }
-  }
+}
+
+function createTypeHTML(type, typeGerman, i){
+    document.getElementById('type-container').innerHTML += /*html*/ `
+        <div class="type ${type}" id="type${i}">${typeGerman}</div>
+    `;
+        
+}
+
+// async function type(pokemonData) {
+//     let url = pokemonData['types'][0]['type']['url'];
+//     let detailsAsJson = await loadDetails(url);
+//     let type = detailsAsJson['names'][4]['name'];
+//     document.getElementById('type').innerHTML = type;
+//     setBgColor(pokemonData, 'type')
+//     stats(pokemonData);
+// }
+
+
+function stats(pokemonData) {
+    let kp = pokemonData['stats'][0]['base_stat'];
+    let attack = pokemonData['stats'][1]['base_stat'];
+    let defense = pokemonData['stats'][2]['base_stat'];
+    let spAtack = pokemonData['stats'][3]['base_stat'];
+    let spDefense = pokemonData['stats'][4]['base_stat'];
+    let speed = pokemonData['stats'][5]['base_stat'];
+    pokemonChart(kp, attack, defense, spAtack, spDefense, speed);
+}
+
 
 
 function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
@@ -200,7 +203,7 @@ function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
         plugins: [ChartDataLabels],
         type: 'bar',
         data: {
-        labels: ['KP', 'Angriff', 'Vert.', 'Sp-Angr.', 'SP-Vert.', 'Initiative'],
+            labels: ['KP', 'Angriff', 'Vert.', 'Sp-Angr.', 'SP-Vert.', 'Initiative'],
         datasets: [{
             label: '# of Votes',
             data: [kp, attack, defense, spAtack, spDefense, speed],
@@ -208,22 +211,22 @@ function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
             //borderColor: 'blue',
             backgroundColor: ['#FBCB04'],
         }]
-      },
+    },
       options: {
         scales: {
-          y: {
+            y: {
             display: false
           },
           x: {
-            grid: {
-              drawOnChartArea: false
+              grid: {
+                  drawOnChartArea: false
             }
           }
         },
         plugins: {   
           legend: {
             display: false
-          },
+        },
           datalabels: {
             anchor: 'end',
             align: 'bottom',
@@ -231,14 +234,19 @@ function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
             font: {
               weight: 'bold',
             }
-            }
         }
-      }
-    });
-  }
-  
-  
+    }
+}
+});
+}
 
+
+function destroyPokemonChart() {
+    const chart = Chart.getChart("chart");
+    if (chart) {
+      chart.destroy();
+    }
+  }
 
 
 function next() {
@@ -254,6 +262,7 @@ function back() {
 
 
 function closeCard() {
+    document.getElementById('type-container').innerHTML = '';
     destroyPokemonChart()
     document.getElementById('overlay').classList.add('d-none');
 }

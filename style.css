@@ -212,26 +212,25 @@ input {
 }
 
 .chart-container {
-    width: 95%;
+    width: 90%;
     height: auto;
     display: flex;
     align-items: center;
 }
 
-.chart {
-
-}
-
 .description {
-    width: 90%;
+    margin-top: 20px;
+    width: 88%;
+    text-align: center;
 }
 
 .details-container {
+    margin-top: 20px;
     background-color: rgb(221, 221, 221);
     width: 90%;
-    border-radius: 25px;
+    border-radius: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .details-container h4, .details-container p {
@@ -239,9 +238,15 @@ input {
     margin-bottom: 5px;
 }
 
+.type-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .type {
     padding: 5px 0 5px 0;
-    width: 80%;
+    width: 140px;
     background-color: rgb(221, 221, 221);
     text-align: center;
     border-radius: 5px;
