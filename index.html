@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;700;900&display=swap" rel="stylesheet">
 
+    <!-- chartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+
+    <!-- chart JS Plugin "Datalabels" -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
 </head>
 
     <body onload="init()">
@@ -19,10 +25,10 @@
     <header >
         <img  class="logo" src="./img/pokedex.png" alt="">
 
-        <form onsubmit="searchPokemon(); return false">
+        <!-- <form onsubmit="searchPokemon(); return false">
             <input type="text" class="input-field" id="input-field" name="inputField" placeholder="Suche">
             <button class="submit-btn" type="submit">Go!</button>
-        </form>
+        </form> -->
 
 
 
@@ -46,6 +52,10 @@
             <div class="card-top" id="card-2"></div>
 
             <div class="white-inlay">
+
+                <div class="chart-container">
+                    <canvas id="chart" class="chart"></canvas>
+                </div>
 
                 <div class="description" id="description"></div>
 

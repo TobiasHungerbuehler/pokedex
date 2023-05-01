@@ -162,7 +162,83 @@ async function type(pokemonData) {
     let type = detailsAsJson['names'][4]['name'];
     document.getElementById('type').innerHTML = type;
     setBgColor(pokemonData, 'type')
+    stats(pokemonData);
 }
+
+
+    
+    function stats(pokemonData) {
+        console.log(pokemonData['stats'][0]['base_stat'])
+        console.log('KP =',pokemonData['stats'][0]['base_stat'])
+        console.log('Angr =',pokemonData['stats'][1]['base_stat'])
+        console.log('Vert =',pokemonData['stats'][2]['base_stat'])
+        console.log('Sp Angr =',pokemonData['stats'][3]['base_stat'])
+        console.log('Sp Vert =',pokemonData['stats'][4]['base_stat'])
+        console.log('Initiative =',pokemonData['stats'][5]['base_stat'])
+
+        let kp = pokemonData['stats'][0]['base_stat'];
+        let attack = pokemonData['stats'][1]['base_stat'];
+        let defense = pokemonData['stats'][2]['base_stat'];
+        let spAtack = pokemonData['stats'][3]['base_stat'];
+        let spDefense = pokemonData['stats'][4]['base_stat'];
+        let speed = pokemonData['stats'][5]['base_stat'];
+        pokemonChart(kp, attack, defense, spAtack, spDefense, speed);
+}
+
+function destroyPokemonChart() {
+    const chart = Chart.getChart("chart");
+    if (chart) {
+      chart.destroy();
+    }
+  }
+
+
+function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
+    const ctx = document.getElementById('chart');
+  
+    new Chart(ctx, {
+        plugins: [ChartDataLabels],
+        type: 'bar',
+        data: {
+        labels: ['KP', 'Angriff', 'Vert.', 'Sp-Angr.', 'SP-Vert.', 'Initiative'],
+        datasets: [{
+            label: '# of Votes',
+            data: [kp, attack, defense, spAtack, spDefense, speed],
+            borderWidth: 1,
+            //borderColor: 'blue',
+            backgroundColor: ['#FBCB04'],
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            display: false
+          },
+          x: {
+            grid: {
+              drawOnChartArea: false
+            }
+          }
+        },
+        plugins: {   
+          legend: {
+            display: false
+          },
+          datalabels: {
+            anchor: 'end',
+            align: 'bottom',
+            color: 'black',
+            font: {
+              weight: 'bold',
+            }
+            }
+        }
+      }
+    });
+  }
+  
+  
+
 
 
 function next() {
@@ -178,6 +254,7 @@ function back() {
 
 
 function closeCard() {
+    destroyPokemonChart()
     document.getElementById('overlay').classList.add('d-none');
 }
 
