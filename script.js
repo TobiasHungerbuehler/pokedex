@@ -1,4 +1,5 @@
 let selectetPokemon;
+let colorClass;
 let validClasses = ['grass', 'fire', 'water', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'psychic'];
 
 
@@ -58,7 +59,7 @@ function showCardTop(pokemonData, i) {
 
 
 function createCardTopHTML(i, pokemonNameEdit, pokemonImg, pokemonId) {
-    document.getElementById('card'+i).innerHTML = /*html*/ `
+    document.getElementById('card'+i).innerHTML += /*html*/ `
         <div class="card-top">
             <img class="icon-pokedex-logo" src="./img/pokedex.png" alt="">
             <h1 id="name">${pokemonNameEdit}</h1>
@@ -72,7 +73,7 @@ function createCardTopHTML(i, pokemonNameEdit, pokemonImg, pokemonId) {
 
 
 function setBgColor(pokemonData, parent) {
-    let colorClass = pokemonData['types'][0]['type']['name'];
+    colorClass = pokemonData['types'][0]['type']['name'];
     for (let i = 0; i < validClasses.length; i++) {
         if (colorClass === validClasses[i]) {
         document.getElementById(parent).classList.add(colorClass);
@@ -96,7 +97,6 @@ function showOverlay(pokemonData, pokemonId) {
     document.getElementById('overlay').classList.remove('d-none') 
     setBgColor(pokemonData, 'card-1');
     showCardTop(pokemonData, -2);
-     
     showDetails(pokemonData, pokemonId);
 }
 
@@ -170,18 +170,8 @@ async function getType(pokemonData) {
 function createTypeHTML(type, typeGerman, i){
     document.getElementById('type-container').innerHTML += /*html*/ `
         <div class="type ${type}" id="type${i}">${typeGerman}</div>
-    `;
-        
+    `;   
 }
-
-// async function type(pokemonData) {
-//     let url = pokemonData['types'][0]['type']['url'];
-//     let detailsAsJson = await loadDetails(url);
-//     let type = detailsAsJson['names'][4]['name'];
-//     document.getElementById('type').innerHTML = type;
-//     setBgColor(pokemonData, 'type')
-//     stats(pokemonData);
-// }
 
 
 function stats(pokemonData) {
@@ -198,17 +188,14 @@ function stats(pokemonData) {
 
 function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
     const ctx = document.getElementById('chart');
-  
     new Chart(ctx, {
         plugins: [ChartDataLabels],
         type: 'bar',
         data: {
             labels: ['KP', 'Angriff', 'Vert.', 'Sp-Angr.', 'SP-Vert.', 'Initiative'],
         datasets: [{
-            label: '# of Votes',
+            label: '',
             data: [kp, attack, defense, spAtack, spDefense, speed],
-            borderWidth: 1,
-            //borderColor: 'blue',
             backgroundColor: ['#FBCB04'],
         }]
     },
@@ -232,7 +219,7 @@ function pokemonChart(kp, attack, defense, spAtack, spDefense, speed) {
             align: 'bottom',
             color: 'black',
             font: {
-              weight: 'bold',
+              font: 'bold',
             }
         }
     }
@@ -257,11 +244,28 @@ function next() {
 
 function back() {
     closeCard();
-    showFullCard(selectetPokemon-1)
+    if(selectetPokemon !== 1) {
+        showFullCard(selectetPokemon-1)
+    }
+}
+
+
+function showContainer(id) {
+    hideContainers()
+    document.getElementById(id).classList.remove('d-none')
+}
+
+
+function hideContainers() {
+    document.getElementById('description-container').classList.add('d-none')
+    document.getElementById('chart-container').classList.add('d-none')
+    document.getElementById('details-container').classList.add('d-none')
 }
 
 
 function closeCard() {
+    document.getElementById('card-1').classList.remove(colorClass);
+    document.getElementById('card-2').innerHTML = '';
     document.getElementById('type-container').innerHTML = '';
     destroyPokemonChart()
     document.getElementById('overlay').classList.add('d-none');
