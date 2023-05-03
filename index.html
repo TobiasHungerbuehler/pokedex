@@ -25,15 +25,15 @@
     <header >
         <img  class="logo" src="./img/pokedex.png" alt="">
 
-        <!-- <form onsubmit="searchPokemon(); return false">
+        <form onsubmit="searchPokemon(); return false">
             <input type="text" class="input-field" id="input-field" name="inputField" placeholder="Suche">
             <button class="submit-btn" type="submit">Go!</button>
-        </form> -->
+        </form>
 
 
 
 
-
+        
     </header>
     
     
@@ -45,26 +45,47 @@
     
     
     <div class="overlay d-none" id="overlay">
-
+        
         <div class="card full-card" id="card-1">
             <img class="icon-ball ball-rotation" id="icon-ball-1" src="./img/ball2.png" alt="">
-
+            
             <div class="card-top" id="card-2"></div>
 
+            <div class="card-nav">
+                <img src="./img/arrow.png" alt="" onclick="back()">
+                <img src="./img/close.png" alt="" onclick="closeCard()">
+                <img src="./img/arrow.png" alt="" onclick="next()">
+            </div>
+            
+            
             <div class="white-inlay">
                 
-                <h3>Typ</h3>
                 
-                <div class="type-container" id="type-container"></div>
+                <nav>
+                    <div onclick="showContainer('description-container')">Info</div>
+                    <div onclick="showContainer('chart-container')">Statistik</div>
+                    <div onclick="showContainer('details-container')">Details</div>
+                </nav>
                 
-                <div class="description" id="description"></div>
+                <div class="description-container full-width" id="description-container">
+                    
+                    <div class="description" id="description"></div>
+                    
+                    <h4>Typ</h4>
+                    <div class="type-container" id="type-container"></div>
+                    
+                </div>
+                
 
-                <div class="chart-container">
+                <div class="chart-container d-none full-width" id="chart-container">
                     <canvas id="chart" class="chart"></canvas>
                 </div>
 
+                
+                
 
-                <div class="details-container">
+
+                <div class="details-container d-none" id="details-container">
                     <div>
                         <h4>Grösse</h4>
                         <p id="height"></p>
@@ -82,18 +103,11 @@
                 </div>
 
 
-
                 
                 
             </div>
-
-            <div class="card-nav">
-                <button onclick="back()">back</button>
-                <button onclick="closeCard()" >Schliessen</button>
-                <button onclick="next()">next</button>
-            </div>
-
-
+            
+            
         </div>
 
 
