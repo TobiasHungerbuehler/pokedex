@@ -305,6 +305,10 @@ async function searchPokemon() {
     }  
 }
 
+function doNotClose(event) {
+	event.stopPropagation();
+}
+
 
 
 
