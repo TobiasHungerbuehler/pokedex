@@ -19,15 +19,28 @@ async function renderPokedex() {
 
 async function loadPokemonData(pokemonId) {
     let url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    let response = await fetch(url);
-    if (!response.ok) {
-        errorMessage('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden');
-        return false;
-        } else {
+        try {
+            let response = await fetch(url);
             let responseAsJson = await response.json();
-            return responseAsJson;   
+            return responseAsJson;
+        } catch {
+            errorMessage('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden');
+            return false;
         }
+
 }
+
+// async function loadPokemonData2(pokemonId) {
+//     let url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+//     let response = await fetch(url);
+//     if (!response.ok) {
+//         errorMessage('Sorry... Pokemon nicht gefunden. Nur Englische Namen oder Zahlen verwenden');
+//         return false;
+//         } else {
+//             let responseAsJson = await response.json();
+//             return responseAsJson;   
+//         }
+// }
 
 
 function createIconContainer(pokemonData, i) {
@@ -103,8 +116,13 @@ function showOverlay(pokemonData, pokemonId) {
 
 async function loadDetails(url) {
     let response = await fetch(url);
-    let responseAsJson = await response.json();
-    return responseAsJson;   
+        try {
+            let responseAsJson = await response.json();
+            return responseAsJson;   
+        } catch {
+            errorMessage('Es ist ein Fehler aufgetreten');
+            return false;
+        }
 }
 
 
