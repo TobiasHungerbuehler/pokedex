@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
+    <link rel="icon" type="image/svg" href="./img/fav.png" sizes="any">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 
@@ -19,31 +20,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
 </head>
-
     <body onload="init()">
-
     <header >
         <img  class="logo" src="./img/pokedex.png" alt="">
-
         <form onsubmit="searchPokemon(); return false">
             <input type="text" class="input-field" id="input-field" name="inputField" placeholder="Suche">
             <button class="submit-btn" type="submit">Go!</button>
         </form>
-
-
-
-
-        
     </header>
-    
-    
-    <div class="stage" id="stage">
-
-               
-    </div>
-    
-    
-    
+    <div class="stage" id="stage"></div>
     <div class="overlay d-none" id="overlay" onclick="closeCard()">
         
         <div class="card full-card" id="card-1" onclick="doNotClose(event)">
@@ -56,64 +41,36 @@
                 <img src="./img/close.png" alt="" onclick="closeCard()">
                 <img src="./img/arrow.png" alt="" onclick="next()">
             </div>
-            
-            
             <div class="white-inlay">
-                
-                
                 <nav>
                     <div onclick="showContainer('description-container')">Info</div>
                     <div onclick="showContainer('chart-container')">Statistik</div>
                     <div onclick="showContainer('details-container')">Details</div>
                 </nav>
-                
                 <div class="description-container full-width" id="description-container">
-                    
                     <div class="description" id="description"></div>
-                    
                     <h4>Typ</h4>
                     <div class="type-container" id="type-container"></div>
-                    
                 </div>
-                
-
                 <div class="chart-container d-none full-width" id="chart-container">
                     <canvas id="chart" class="chart"></canvas>
                 </div>
-
-                
-                
-
-
                 <div class="details-container d-none" id="details-container">
                     <div>
                         <h4>Grösse</h4>
-                        <p id="height"></p>
-                        
+                        <p id="height"></p>  
                         <h4>Gewicht</h4>
                         <p id="weight"></p>
                     </div>
                     <div>
                         <h4>Kategorie</h4>
                         <p id="species"></p>
-
                         <h4>Fähigkeiten</h4>
                         <p id="ability"></p>
                     </div>
                 </div>
-
-
-                
-                
             </div>
-            
-            
         </div>
-
-
     </div>
-    
-
-    
 </body>
 </html>
