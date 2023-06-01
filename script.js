@@ -1,8 +1,8 @@
 let selectetPokemon;
 let colorClass;
 let validClasses = ['grass', 'fire', 'water', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'psychic'];
-let startIndex = 0; // Start from the 26th Pokemon
-let count = 25; // Load the next 25 Pokemon
+let startIndex = 0; 
+let count = 25; 
 
 /**
  * Initializes the Pokedex by rendering the initial set of Pokemon icons.
@@ -18,18 +18,21 @@ function init() {
  */
 async function renderPokedex(startIndex, count) {
     for (let i = startIndex; i <= count-1; i++) {
-        console.log('startindex=', i, 'count=', count)
         let pokemonData = await loadPokemonData(i +1);           
         createIconContainer(pokemonData, i)
     }
 }
 
-function x(){
+
+/**
+ * Loads and renders the next set of Pokemon in the Pokedex.
+ */
+function loadMore(){
     startIndex = startIndex +25;
     count = count +25;
-    console.log(startIndex, count)
     renderPokedex(startIndex, count)
 }
+
 
 /**
  * Renders the next set of Pokemon icons in the Pokedex.
@@ -43,32 +46,6 @@ async function renderNextPokedexSet(startIndex, count) {
     }
   }
   
-//   // Usage example:
-//   let startIndex = 25; // Start from the 26th Pokemon
-//   let count = 25; // Load the next 25 Pokemon
-//   renderNextPokedexSet(startIndex, count);
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
