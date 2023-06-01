@@ -24,7 +24,6 @@ h4 {
 }
 
 
-
 header {
     position: sticky;
     background-color: white;
@@ -172,15 +171,6 @@ input {
     transform: rotate(180deg);
 }
 
-/* .card-nav button {
-    width: 40px;
-    padding: 5px 30px 5px 30px;
-    font-size: 20px;
-    background-color: #e2df32;
-    color: rgb(192, 192, 192);
-    border: none;
-    border-radius: 6px;
-} */
 
 .icon-pokedex-logo {
     margin-top: 10px;
@@ -314,6 +304,25 @@ nav div {
     flex-direction: column;
 }
 
+.load-more-btn{
+    padding: 3px;
+    margin: 20px 20%;
+    background-color: #78C5E1;
+    align-self: center;
+    color: #FFCD00;
+    border-radius: 20px;
+    border: 1px solid rgb(255, 205, 0, 0.5);
+    box-shadow: -1px 1px 2px 2px rgba(0,0,0,0.4);
+    transition: all 225ms ease-in-out;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+}
+
+.load-more-btn:hover{
+    transition: all 225ms ease-in-out;
+    background-color: #6acdf1;
+}
 
 .grass {
     background-color: green;
